@@ -1,109 +1,73 @@
-```
-<div class="main-content">
-    <div class="sidebar-left">
-        <div class="back-btn">&lt;</div>
-        <div class="years" id="year-container">
-            <span data-year="2024" class="active">2024</span>
-            <span data-year="2023">2023</span>
-            <span data-year="2022">2022</span>
-            <span data-year="2021">2021</span>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2024 Toyota Corolla</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .container { width: 1200px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 0 0 0 40px; height: 80px; border-bottom: 1px solid #eee; }
+    .logo { color: #eb0a1e; font-size: 24px; font-weight: 800; letter-spacing: 2px; }
+    .header-right { display: flex; height: 100%; align-items: center; }
+    .menu-icon { font-size: 20px; margin-right: 20px; cursor: pointer; }
+    .sign-in { background-color: #eb0a1e; color: white; padding: 0 30px; height: 100%; display: flex; align-items: center; font-weight: bold; cursor: pointer; }
+    .main-content { display: flex; height: 600px; }
+    .sidebar-left { width: 80px; border-right: 1px solid #eee; display: flex; flex-direction: column; align-items: center; padding-top: 40px; }
+    .back-btn { width: 30px; height: 30px; border: 1px solid #ccc; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 50px; cursor: pointer; font-size: 12px; }
+    .years { display: flex; flex-direction: column; gap: 30px; color: #999; font-size: 12px; transform: rotate(-90deg); margin-top: 100px; white-space: nowrap; }
+    .years span { cursor: pointer; transition: 0.3s; }
+    .years span.active { color: #eb0a1e; font-weight: bold; }
+    .center-panel { flex: 1; padding: 40px; display: flex; flex-direction: column; position: relative; }
+    .car-header { display: flex; justify-content: space-between; }
+    .car-title h1 { font-size: 32px; color: #000; margin-bottom: 5px; }
+    .car-title p { font-size: 12px; color: #666; }
+    .car-price { text-align: right; }
+    .car-price h2 { font-size: 24px; color: #eb0a1e; }
+    .car-price p { font-size: 12px; color: #666; margin-top: 5px; }
+    .car-image-area { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; }
+    .car-image-area img { max-width: 80%; height: auto; object-fit: contain; }
+    .bottom-tabs { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid #eee; font-size: 11px; font-weight: bold; color: #999; }
+    .tabs-left { display: flex; gap: 20px; }
+    .tabs-left span { cursor: pointer; }
+    .tabs-left span.active { color: #eb0a1e; }
+    .tabs-right { display: flex; gap: 15px; }
+    .btn-details { background: #eb0a1e; color: white; padding: 10px 25px; border-radius: 20px; cursor: pointer; border: none; font-weight: bold; font-size: 11px; }
+    .btn-specials { border: 1px solid #ccc; padding: 10px 25px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 11px; color: #666; }
+    .sidebar-right { width: 300px; background: #111; color: white; display: flex; flex-direction: column; }
+    .sidebar-right-header { padding: 20px; font-size: 12px; letter-spacing: 1px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; }
+    .car-list { flex: 1; overflow-y: auto; scroll-behavior: smooth; }
+    .car-list::-webkit-scrollbar { width: 5px; }
+    .car-list::-webkit-scrollbar-thumb { background: #444; }
+    .car-item { padding: 20px; border-bottom: 1px solid #222; display: flex; gap: 15px; cursor: pointer; transition: 0.3s; }
+    .car-item:hover, .car-item.active { background: #222; }
+    .car-item img { width: 80px; object-fit: contain; }
+    .car-item-info h4 { font-size: 14px; margin-bottom: 5px; }
+    .car-item-info p { font-size: 10px; color: #888; margin-bottom: 5px; }
+    .car-item-info .price { font-size: 14px; font-weight: bold; color: #fff; }
+    .details-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.95); z-index: 10; display: none; flex-direction: column; padding: 60px; }
+    .details-modal.active { display: flex; }
+    .close-modal { align-self: flex-end; font-size: 24px; cursor: pointer; color: #eb0a1e; font-weight: bold; margin-bottom: 20px; border: none; background: none; }
+    .details-content h2 { font-size: 28px; margin-bottom: 20px; color: #000; }
+    .details-content ul { list-style: none; }
+    .details-content ul li { font-size: 16px; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px; display: flex; }
+    .details-content ul li strong { width: 150px; color: #555; }
+</style>
+</head>
+<body>
 
-    <div class="center-panel">
-        <div class="car-header">
-            <div class="car-title">
-                <h1>2024 Toyota Corolla</h1>
-                <p>A Bold Spirit in a Reliable Package.<br>CELESTITE GRAY</p>
-            </div>
-            <div class="car-price">
-                <h2>1,250,000 TL</h2>
-                <p>Starting msrp<br>As shown 1,450,000 TL</p>
-            </div>
+<div class="container">
+    <header>
+        <div class="logo">TOYOTA</div>
+        <div class="header-right">
+            <span class="menu-icon">☰</span>
+            <div class="sign-in">8 SIGN IN</div>
         </div>
+    </header>
 
-        <div class="car-image-area">
-            <div style="width: 400px; height: 200px; background: #ddd; display: flex; justify-content: center; align-items: center; border-radius: 10px; color: #888;">[Vehicle Image Placeholder]</div>
-        </div>
-
-        <div class="bottom-tabs">
-            <div class="tabs-left">
-                <span class="active">OVERVIEW</span>
-                <span>GALLERY</span>
-                <span>FEATURES</span>
-                <span>FULL SPECS</span>
-                <span>COMPARE</span>
-            </div>
-            <div class="tabs-right">
-                <button class="btn-details" id="detailsBtn">DETAILS</button>
-                <button class="btn-specials">SPECIALS</button>
-            </div>
-        </div>
-
-        <div class="details-modal" id="detailsModal">
-            <button class="close-modal" id="closeModal">✕</button>
-            <div class="details-content">
-                <h2>Vehicle Details</h2>
-                <ul>
-                    <li><strong>Make:</strong> Toyota</li>
-                    <li><strong>Model:</strong> Corolla</li>
-                    <li><strong>Year:</strong> 2024</li>
-                    <li><strong>Engine:</strong> 2.0L 4-cylinder</li>
-                    <li><strong>Transmission:</strong> CVT</li>
-                    <li><strong>Drivetrain:</strong> FWD</li>
-                    <li><strong>Color:</strong> Celestite Gray</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="sidebar-right">
-        <div class="sidebar-right-header">
-            <span>✕ CAR SELECT</span>
-        </div>
-        <div class="car-list" id="carList">
-            <div class="car-item active" data-year="2024">
-                <div style="width: 80px; height: 50px; background: #555;"></div>
-                <div class="car-item-info">
-                    <h4>2024 Corolla</h4>
-                    <p>Reliable and efficient.</p>
-                    <span class="price">1,250,000 TL</span>
-                </div>
-            </div>
-            <div class="car-item" data-year="2023">
-                <div style="width: 80px; height: 50px; background: #555;"></div>
-                <div class="car-item-info">
-                    <h4>2023 C-HR</h4>
-                    <p>Color outside the lines.</p>
-                    <span class="price">1,150,000 TL</span>
-                </div>
-            </div>
-            <div class="car-item" data-year="2022">
-                <div style="width: 80px; height: 50px; background: #555;"></div>
-                <div class="car-item-info">
-                    <h4>2022 86</h4>
-                    <p>Perfection. Improved.</p>
-                    <span class="price">1,450,000 TL</span>
-                </div>
-            </div>
-            <div class="car-item" data-year="2021">
-                <div style="width: 80px; height: 50px; background: #555;"></div>
-                <div class="car-item-info">
-                    <h4>2021 Mirai</h4>
-                    <p>The new simplicity.</p>
-                    <span class="price">1,650,000 TL</span>
-                </div>
-            </div>
-            <div class="car-item" data-year="2021">
-                <div style="width: 80px; height: 50px; background: #555;"></div>
-                <div class="car-item-info">
-                    <h4>2021 Yaris</h4>
-                    <p>Practical as you are.</p>
-                    <span class="price">950,000 TL</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-```
+    <div class="main-content">
+        <div class="sidebar-left">
+            <div class="back-btn">&lt;</div>
+            <div class="years" id="year-container">
+                <span
