@@ -1,1 +1,261 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saltuklu Otomotiv | Premium Vasıta Vitrini</title>
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Montserrat) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome (İkonlar) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'saltuklu-red': '#E60000',
+                        'saltuklu-dark': '#121212',
+                        'saltuklu-gray': '#F8F9FA'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        body { font-family: 'Montserrat', sans-serif; overflow: hidden; background-color: #F8F9FA; }
+        
+        /* Dev Arka Plan Typografi Efekti */
+        .bg-huge-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18vw;
+            font-weight: 900;
+            color: #E60000;
+            opacity: 0.05;
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        /* Dikey Metin (Sol Bar İçin) */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        /* Araç Görseli Animasyonu */
+        .hero-car-image {
+            z-index: 10;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.3));
+        }
+        
+        .fade-out { opacity: 0; transform: scale(0.95) translateX(-50px); }
+        .fade-in { opacity: 1; transform: scale(1) translateX(0); }
+
+        /* Carousel Scrollbar Gizleme */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .car-card { transition: all 0.3s ease; }
+        .car-card.active { border-color: #E60000; background-color: rgba(230, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="flex flex-col h-screen">
+
+    <!-- ÜST NAVİGASYON (HEADER) -->
+    <header class="w-full h-20 bg-white shadow-sm flex items-center justify-between px-8 z-50 absolute top-0">
+        <div class="flex items-center gap-2">
+            <i class="fa-solid fa-car-side text-3xl text-saltuklu-red"></i>
+            <h1 class="text-2xl font-black tracking-widest text-saltuklu-dark">SALTUKLU<span class="text-saltuklu-red">.</span></h1>
+        </div>
+        <nav class="hidden md:flex gap-8 text-sm font-semibold text-gray-600 tracking-wide">
+            <a href="#" class="hover:text-saltuklu-red transition">VİTRİN</a>
+            <a href="#" class="hover:text-saltuklu-red transition">TÜM ARAÇLAR</a>
+            <a href="#" class="hover:text-saltuklu-red transition">EKSPERTİZ</a>
+            <a href="#" class="hover:text-saltuklu-red transition">İLETİŞİM</a>
+        </nav>
+        <a href="https://wa.me/905555555555" target="_blank" class="bg-saltuklu-red text-white px-6 py-3 font-bold text-sm hover:bg-red-700 transition flex items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-lg"></i> BİZE ULAŞIN
+        </a>
+    </header>
+
+    <!-- ANA İÇERİK BÖLÜMÜ -->
+    <main class="flex-1 flex mt-20 relative">
+        
+        <!-- Sol Dikey Bar -->
+        <aside class="w-16 border-r border-gray-200 flex flex-col items-center py-10 justify-between bg-white z-20">
+            <button class="text-gray-400 hover:text-saltuklu-red"><i class="fa-solid fa-chevron-up"></i></button>
+            <div class="flex flex-col gap-8 text-xs font-bold text-gray-400 vertical-text" id="year-nav">
+                <span class="text-saltuklu-red">2025</span>
+                <span>2020</span>
+                <span>2018</span>
+                <span>2017</span>
+            </div>
+            <button class="text-gray-400 hover:text-saltuklu-red"><i class="fa-solid fa-chevron-down"></i></button>
+        </aside>
+
+        <!-- Orta Vitrin Alanı (Hero) -->
+        <section class="flex-1 relative flex items-center justify-center bg-saltuklu-gray overflow-hidden">
+            <!-- Dev Arka Plan Yazısı -->
+            <div id="bg-model-text" class="bg-huge-text">CARAVELLE</div>
+            
+            <!-- Araç Bilgileri (Sol Üst) -->
+            <div class="absolute top-10 left-12 z-20">
+                <h3 id="hero-brand" class="text-saltuklu-red font-bold tracking-widest text-lg">VOLKSWAGEN</h3>
+                <h2 id="hero-model" class="text-5xl font-black text-saltuklu-dark mt-1">Caravelle 2.0 TDI</h2>
+                <p id="hero-desc" class="text-gray-500 font-medium mt-2">Hatasız, Boyasız, Tramersiz 8+1 Otomobil</p>
+                
+                <div class="mt-8 flex gap-10">
+                    <div>
+                        <p class="text-xs text-gray-400 font-semibold">SATIŞ FİYATI</p>
+                        <p id="hero-price" class="text-3xl font-bold text-saltuklu-red mt-1">2.225.000 ₺</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-400 font-semibold">KİLOMETRE</p>
+                        <p id="hero-km" class="text-2xl font-bold text-saltuklu-dark mt-1">21.000</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Araç PNG Görseli -->
+            <img id="hero-image" src="https://via.placeholder.com/800x400/transparent/333333?text=Arac+Gorseli+Buraya+Gelecek" alt="Araç Görseli" class="hero-car-image w-3/4 max-w-4xl object-contain mt-10">
+            
+            <!-- Hızlı Aksiyon Butonları (Sağ Alt) -->
+            <div class="absolute bottom-10 right-12 z-20 flex gap-4">
+                <button class="bg-white border-2 border-gray-200 text-saltuklu-dark px-6 py-3 font-bold text-sm hover:border-saltuklu-red transition rounded-full">
+                    EKSPERTİZ RAPORU
+                </button>
+                <button onclick="openWhatsApp()" class="bg-saltuklu-red text-white px-8 py-3 font-bold text-sm shadow-lg hover:bg-red-700 transition rounded-full flex items-center gap-2">
+                    <i class="fa-solid fa-bolt"></i> HEMEN AL
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- ALT ARAÇ SEÇİCİ (CAROUSEL DRAWER) -->
+    <footer class="h-48 bg-saltuklu-dark text-white w-full border-t border-gray-800 flex flex-col justify-center px-6 z-50">
+        <div class="flex justify-between items-end mb-3 px-2">
+            <div class="flex gap-6 text-xs font-bold text-gray-400 tracking-wider">
+                <span class="text-white border-b-2 border-saltuklu-red pb-1">TÜM ARAÇLAR (10)</span>
+                <span class="hover:text-white cursor-pointer transition">BİNEK</span>
+                <span class="hover:text-white cursor-pointer transition">TİCARİ</span>
+                <span class="hover:text-white cursor-pointer transition">MOTOSİKLET</span>
+            </div>
+            <div class="text-xs text-gray-500 font-semibold">
+                KAYDIR <i class="fa-solid fa-arrow-right-long ml-1"></i>
+            </div>
+        </div>
+        
+        <!-- Dinamik Araç Listesi -->
+        <div id="car-list" class="flex gap-4 overflow-x-auto no-scrollbar pb-2 pt-2 snap-x">
+            <!-- JavaScript ile doldurulacak -->
+        </div>
+    </footer>
+
+    <!-- SCRIPT ALANI (DİNAMİK VERİ YÖNETİMİ) -->
+    <script>
+        // Saltuklu Otomotiv Veritabanı (Topladığımız Araçlar)
+        const vehicles = [
+            { id: 1, brand: 'Volkswagen', model: 'Caravelle 2.0 TDI', year: '2025', price: '2.225.000 ₺', km: '21.000', bgText: 'CARAVELLE', type: 'Ticari', desc: 'Hatasız, Boyasız, Tramersiz 8+1 Otomobil' },
+            { id: 2, brand: 'Citroen', model: 'C5 Aircross 1.5 BlueHDI', year: '2020', price: '1.460.000 ₺', km: '99.000', bgText: 'AIRCROSS', type: 'SUV', desc: 'Cam Tavan, Hayalet Ekran, 360 Kamera' },
+            { id: 3, brand: 'BMW', model: '116d ED EfficientDynamics', year: '2013', price: '899.000 ₺', km: '227.000', bgText: '1 SERIES', type: 'Binek', desc: 'Sunroof, Hatasız, Masrafsız' },
+            { id: 4, brand: 'Volkswagen', model: 'Tiguan 1.4 TSI Highline', year: '2016', price: '1.675.000 ₺', km: '159.000', bgText: 'TIGUAN', type: 'SUV', desc: 'Cam Tavan, Otomatik Park, LED Far' },
+            { id: 5, brand: 'Renault', model: 'Kangoo 1.5 BlueDCi Iconic', year: '2025', price: '1.440.000 ₺', km: '26.000', bgText: 'KANGOO', type: 'Ticari', desc: 'Özel Seri, Hatasız, Boyasız' },
+            { id: 6, brand: 'Volkswagen', model: 'Transporter 2.0 TDI', year: '2025', price: '1.590.000 ₺', km: '11.000', bgText: 'TRANSPORTER', type: 'Ticari', desc: '%20 Faturalı, Sıfırdan Farksız' },
+            { id: 7, brand: 'Harley-Davidson', model: 'Roadster 1200R', year: '2018', price: '930.000 ₺', km: '9.000', bgText: 'ROADSTER', type: 'Motosiklet', desc: 'Kazasız, Vance&Hines Egzoz, Kapalı Garaj' },
+            { id: 8, brand: 'Honda', model: 'Jazz 1.4 ES', year: '2003', price: '615.000 ₺', km: '241.000', bgText: 'JAZZ', type: 'Binek', desc: 'Cam Tavan, 7 İleri Otomatik, Tablet Ekran' },
+            { id: 9, brand: 'Fiat', model: 'Doblo Cargo 1.6 Maxi', year: '2017', price: '460.000 ₺', km: '239.000', bgText: 'DOBLO', type: 'Ticari', desc: 'Ağır Bakımları Yeni, Masrafsız' },
+            { id: 10, brand: 'Fiat', model: 'Doblo Cargo 1.3 Maxi', year: '2015', price: '435.000 ₺', km: '279.000', bgText: 'DOBLO', type: 'Ticari', desc: 'Klimalı, Değişensiz, Boyasız' }
+        ];
+
+        let activeIndex = 0;
+
+        const DOM = {
+            brand: document.getElementById('hero-brand'),
+            model: document.getElementById('hero-model'),
+            desc: document.getElementById('hero-desc'),
+            price: document.getElementById('hero-price'),
+            km: document.getElementById('hero-km'),
+            bgText: document.getElementById('bg-model-text'),
+            heroImage: document.getElementById('hero-image'),
+            carList: document.getElementById('car-list')
+        };
+
+        function init() {
+            renderCarousel();
+            updateHero(0);
+        }
+
+        function renderCarousel() {
+            DOM.carList.innerHTML = '';
+            vehicles.forEach((car, index) => {
+                const isActive = index === activeIndex ? 'border-saltuklu-red bg-gray-800' : 'border-gray-700 bg-gray-900';
+                
+                const card = document.createElement('div');
+                card.className = `car-card flex-shrink-0 w-64 border rounded-md p-3 cursor-pointer hover:border-gray-400 snap-center ${isActive}`;
+                card.onclick = () => updateHero(index);
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-gray-400">${car.year}</span>
+                        <span class="text-xs font-bold text-saltuklu-red">${car.price}</span>
+                    </div>
+                    <h4 class="font-bold text-sm text-white truncate">${car.brand} ${car.model}</h4>
+                    <p class="text-xs text-gray-500 truncate mt-1">${car.type} | ${car.km} km</p>
+                `;
+                DOM.carList.appendChild(card);
+            });
+        }
+
+        function updateHero(index) {
+            activeIndex = index;
+            const car = vehicles[index];
+
+            // Animasyon Sınıfı Ekle
+            DOM.heroImage.classList.remove('fade-in');
+            DOM.heroImage.classList.add('fade-out');
+
+            setTimeout(() => {
+                // Verileri Güncelle
+                DOM.brand.textContent = car.brand.toUpperCase();
+                DOM.model.textContent = car.model;
+                DOM.desc.textContent = car.desc;
+                DOM.price.textContent = car.price;
+                DOM.km.textContent = car.km;
+                DOM.bgText.textContent = car.bgText;
+                
+                // NOT: Görselleri hazırlandığında buradaki src yapısını './img/arac1.png' olarak güncelleyeceğiz.
+                DOM.heroImage.src = `https://via.placeholder.com/800x400/transparent/333333?text=${car.brand}+${car.bgText}`;
+
+                // Animasyonu Geri Al
+                DOM.heroImage.classList.remove('fade-out');
+                DOM.heroImage.classList.add('fade-in');
+            }, 300); // 300ms transition time
+
+            renderCarousel(); // Alt bar renklerini güncelle
+        }
+
+        function openWhatsApp() {
+            const car = vehicles[activeIndex];
+            const message = `Merhaba Saltuklu Otomotiv, vitrindeki ${car.year} model ${car.brand} ${car.model} (${car.price}) aracınızla ilgileniyorum. Bilgi alabilir miyim?`;
+            const url = `https://wa.me/905555555555?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // Projeyi Başlat
+        init();
+    </script>
+</body>
+</html>
